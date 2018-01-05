@@ -1,0 +1,14 @@
+package cn.springcloud.consumer;
+
+import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+@FeignClient(value = "computeService",fallback = ComputeClientHystrix.class)
+public interface ComputeClient {
+
+
+    @RequestMapping(value = "/add",method = RequestMethod.GET)
+    Integer add(@RequestParam(value = "a") int a,@RequestParam(value = "b") int b);
+}
